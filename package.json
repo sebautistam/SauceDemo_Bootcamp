@@ -1,0 +1,31 @@
+{
+  "name": "saucedemo_bootcamp",
+  "version": "1.0.0",
+  "description": "SauceDemo for Bootcamp (Mocha and Cucumber)",
+  "private": true,
+  "homepage": "https://github.com/sebautistam/SauceDemo_Bootcamp#readme",
+  "bugs": {
+    "url": "https://github.com/sebautistam/SauceDemo_Bootcamp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sebautistam/SauceDemo_Bootcamp.git"
+  },
+  "license": "ISC",
+  "author": "sebautistam",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test:mocha": "wdio run src/test-mocha/config/wdio.conf.js",
+    "test:cucumber": "wdio run src/test-cucumber/config/wdio.conf.js",
+    "test:all": "wdio run src/test-mocha/config/wdio.conf.js && wdio run src/test-cucumber/config/wdio.conf.js"
+  },
+  "devDependencies": {
+    "@wdio/allure-reporter": "^9.15.0",
+    "@wdio/cli": "^9.15.0",
+    "@wdio/cucumber-framework": "^9.15.0",
+    "@wdio/local-runner": "^9.15.0",
+    "@wdio/mocha-framework": "^9.15.0",
+    "@wdio/spec-reporter": "^9.15.0"
+  }
+}
