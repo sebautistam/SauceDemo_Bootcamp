@@ -50,11 +50,15 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
+    capabilities: [
+    
+        {
         browserName: 'chrome'
-    }, {
-        browserName: 'MicrosoftEdge'
-    }],
+        },
+        {
+            browserName: 'MicrosoftEdge'
+        }
+    ],
 
     //
     // ===================
@@ -128,7 +132,9 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: ['spec',
         ['allure', {
-            outputDir: './reports/allure/results'}]
+            outputDir: './reports/allure/results',
+            disableWebdriverStepsReporting: true // disable all line to line, leave steps
+        }]
     ],
 
     // Options to be passed to Mocha.

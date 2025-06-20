@@ -1,3 +1,0 @@
-{
-  "text": "password_test"
-}
