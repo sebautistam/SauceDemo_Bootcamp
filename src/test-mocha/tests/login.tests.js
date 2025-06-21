@@ -48,6 +48,7 @@ describe('Login page', () => {
                 await expect(loginPage.item('passwordTB')).toHaveValue('');
             });
 
+            //checks correct mesage
             await allure.step('Check Error message is the one expected', async () => {
                 //click login button and expect the error
                 await loginPage.item('loginBtn').click();

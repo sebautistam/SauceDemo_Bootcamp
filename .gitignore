@@ -1,6 +1,3 @@
 node_modules
 .allure
 reports/
-reports/allure
-reports/allure/results
-reports/allure/report
