@@ -1,17 +1,10 @@
 import allure from '@wdio/allure-reporter';
 import LoginPage from '../../pom/pages/login.page';
+import { testData } from './test-data/login.test.data';
 
 const loginPage = new LoginPage();
 
 describe('Login page', () => {
-
-    //parametrize test data 
-    const testData = [
-        {username:"username_test" , password:"password_test", test: "emptyFields"},
-        {username:"standard_user" , password:"secret_sauce", test: "correctLogin"},
-        {username:"error_user" , password:"secret_sauce", test: "correctLogin"},
-        {username:"visual_user" , password:"secret_sauce", test: "correctLogin"},
-    ];
 
     // open the website before each test
     beforeEach( async() => {
