@@ -17,12 +17,18 @@
   "main": "index.js",
   "scripts": {
     "test:mocha": "npm run allure-mocha:clean && wdio run src/test-mocha/config/wdio.conf.js",
-    "test:cucumber": "wdio run src/test-cucumber/config/wdio.conf.js",
-    "test:all": "wdio run src/test-mocha/config/wdio.conf.js && wdio run src/test-cucumber/config/wdio.conf.js",
-    "allure-mocha:clean": "rimraf reports/allure/results reports/allure/report",
-    "allure-mocha:generate": "npx allure generate reports/allure/results -o reports/allure/report",
-    "allure-mocha:open": "npx allure open reports/allure/report",
-    "allure-mocha:report": "npm run allure-mocha:generate && npm run allure-mocha:open"
+    "test:cucumber": "npm run allure-cucumber:clean &&wdio run src/test-cucumber/config/wdio.conf.js",
+    "test:all": "npm run test:mocha && npm run test:cucumber",
+
+    "allure-mocha:clean": "rimraf reports/allure-mocha/results reports/allure-mocha/report",
+    "allure-mocha:generate": "npx allure generate reports/allure-mocha/results -o reports/allure-mocha/report",
+    "allure-mocha:open": "npx allure open reports/allure-mocha/report",
+    "allure-mocha:report": "npm run allure-mocha:generate && npm run allure-mocha:open",
+
+    "allure-cucumber:clean": "rimraf reports/allure-cucumber/results reports/allure-cucumber/report",
+    "allure-cucumber:generate": "npx allure generate reports/allure-cucumber/results -o reports/allure-cucumber/report",
+    "allure-cucumber:open": "npx allure open reports/allure-cucumber/report",
+    "allure-cucumber:report": "npm run allure-cucumber:generate && npm run allure-cucumber:open"
   },
   "devDependencies": {
     "@wdio/cli": "^9.15.0",

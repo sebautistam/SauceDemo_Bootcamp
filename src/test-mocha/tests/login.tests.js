@@ -25,23 +25,18 @@ describe('Login page', () => {
             // fill in username and password
             await allure.step('Fill in Username and Password fields, check it is correct', async () => {
                 
-                await loginPage.item('usernameTB').setValue(data.username);
+                await loginPage.setField('username', data.username);
                 await expect(loginPage.item('usernameTB')).toHaveValue(data.username);
                 
-                await loginPage.item('passwordTB').setValue(data.password);
+                await loginPage.setField('password',data.password);
                 await expect(loginPage.item('passwordTB')).toHaveValue(data.password);
 
             });
 
             //clears fields
             await allure.step('Clear Username and Password fields, check it is empty', async () => {
-                // Simulate double click and clear the fields
-                await loginPage.item('usernameTB').click();
-                await browser.keys(['Control', 'a']);
-                await browser.keys('Delete');
-                await loginPage.item('passwordTB').click();
-                await browser.keys(['Control', 'a']);
-                await browser.keys('Delete');
+                await loginPage.clearField('username');
+                await loginPage.clearField('password');
 
                 //verify the fields are empty
                 await expect(loginPage.item('usernameTB')).toHaveValue('');
@@ -51,7 +46,8 @@ describe('Login page', () => {
             //checks correct mesage
             await allure.step('Check Error message is the one expected', async () => {
                 //click login button and expect the error
-                await loginPage.item('loginBtn').click();
+                await loginPage.clickLogin();
+                //await loginPage.item('loginBtn').click();
                 await expect(loginPage.item('errorField')).toBeDisplayed();
                 // assymetric matcher
                 await expect(loginPage.item('errorField')).toHaveText(expect.stringContaining("Username is required"));
@@ -69,30 +65,26 @@ describe('Login page', () => {
             // fill in username and password
             await allure.step('Fill in Username and Password fields, check it is correct', async () => {
                 
-                //username
-                await loginPage.item('usernameTB').setValue(data.username);
+                await loginPage.setField('username', data.username);
+                await loginPage.setField('password',data.password);
+
                 await expect(loginPage.item('usernameTB')).toHaveValue(data.username);
-                
-                //password
-                await loginPage.item('passwordTB').setValue(data.password);
                 await expect(loginPage.item('passwordTB')).toHaveValue(data.password);
             });
 
             //clear password field
             await allure.step('Clear Password fields, check it is empty', async () => {
-                // Simulate double click and clear password
-                await loginPage.item('passwordTB').click();
-                await browser.keys(['Control', 'a']);
-                await browser.keys('Delete');
+                await loginPage.clearField('password');
 
-                //very username is not empty, password is empty
+                //verify the fields are empty
                 await expect(loginPage.item('usernameTB')).not.toHaveValue('');
                 await expect(loginPage.item('passwordTB')).toHaveValue('');
+
             });
 
             //click login button and expect the error
             await allure.step('Check Error message is the one expected', async () => {
-                await loginPage.item('loginBtn').click();
+                await loginPage.clickLogin();
                 await expect(loginPage.item('errorField')).toBeDisplayed();
                 //check the text contained in the field
                 await expect(loginPage.item('errorField')).toHaveText(expect.stringContaining("Password is required"));
@@ -116,16 +108,17 @@ describe('Login page', () => {
 
             // fill in username and password
             await allure.step('Fill in Username and Password fields, check it is correct', async () => {
-                await loginPage.item('usernameTB').setValue(data.username);
+                await loginPage.setField('username', data.username);
+                await loginPage.setField('password',data.password);
+
                 await expect(loginPage.item('usernameTB')).toHaveValue(data.username);
-                
-                await loginPage.item('passwordTB').setValue(data.password);
                 await expect(loginPage.item('passwordTB')).toHaveValue(data.password);
+                
             });
 
             //click on login button, verify the browser was redirected to correct page
             await allure.step('Check Title and URL are Correct', async () => {
-                await loginPage.item('loginBtn').click();
+                await loginPage.clickLogin();
                 //check browser title
                 await expect(browser).toHaveTitle("Swag Labs");
                 //check browser URL

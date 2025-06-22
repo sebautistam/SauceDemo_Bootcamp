@@ -1,7 +1,7 @@
 class LoginPage {
 
     async open(){
-        return browser.url('/');
+        return await browser.url('/');
     }
 
     item(param) {
@@ -14,6 +14,48 @@ class LoginPage {
         return $(selectors[param.toLowerCase()]);
     }
 
+    async setField(selectedField, value) {
+        let field;
+        switch (selectedField.toLowerCase()) {
+            case "username":
+                field = await this.item('usernametb');
+                break;
+            case "password":
+                field = await this.item('passwordtb');
+                break;
+            default:
+                throw new Error (`Invalid field: ${fieldType}`);
+        }
+        await field.setValue(value);
+    }
+
+    async clearField(selectedField) {
+        let field;
+        switch (selectedField.toLowerCase()){
+            case "username":
+                field = await this.item('usernametb');
+                break;
+            case "password":
+                field = await this.item('passwordtb');
+                break;
+            default:
+                throw new Error (`Invalid field: ${fieldType}`);
+        }
+        await field.click();
+        await browser.keys(['Control', 'a']);
+        await browser.keys('Delete');
+    }
+
+    async clickLogin() {
+        const btn = await this.item('loginbtn');
+        await btn.click();
+    }
+
+    async getErrorMessage() {
+        const errorBox = await this.item('errorfield');
+        return errorBox.getText();
+    }
+    
 }
 
 export default LoginPage;

@@ -132,8 +132,8 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: ['spec',
         ['allure', {
-            outputDir: './reports/allure/results',
-            disableWebdriverStepsReporting: true // disable all line to line, leave steps
+            outputDir: './reports/allure-mocha/results',
+            //disableWebdriverStepsReporting: true // disable all line to line, leave steps
         }]
     ],
 
