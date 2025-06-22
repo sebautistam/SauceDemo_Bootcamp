@@ -16,6 +16,9 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf node_modules package-lock.json reports./logs/",
+    "reinstall": "npm run clean && npm install",
+
     "test:mocha": "npm run allure-mocha:clean && wdio run src/test-mocha/config/wdio.conf.js",
     "test:cucumber": "npm run allure-cucumber:clean &&wdio run src/test-cucumber/config/wdio.conf.js",
     "test:all": "npm run test:mocha && npm run test:cucumber",
