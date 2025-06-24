@@ -26,10 +26,10 @@ describe('Login page', () => {
             await allure.step('Fill in Username and Password fields, check it is correct', async () => {
                 
                 await loginPage.setField('username', data.username);
-                await expect(loginPage.item('usernameTB')).toHaveValue(data.username);
+                await expect(loginPage.usernameTB).toHaveValue(data.username);
                 
                 await loginPage.setField('password',data.password);
-                await expect(loginPage.item('passwordTB')).toHaveValue(data.password);
+                await expect(loginPage.passwordTB).toHaveValue(data.password);
 
             });
 
@@ -39,18 +39,17 @@ describe('Login page', () => {
                 await loginPage.clearField('password');
 
                 //verify the fields are empty
-                await expect(loginPage.item('usernameTB')).toHaveValue('');
-                await expect(loginPage.item('passwordTB')).toHaveValue('');
+                await expect(loginPage.usernameTB).toHaveValue('');
+                await expect(loginPage.passwordTB).toHaveValue('');
             });
 
             //checks correct mesage
             await allure.step('Check Error message is the one expected', async () => {
                 //click login button and expect the error
                 await loginPage.clickLogin();
-                //await loginPage.item('loginBtn').click();
-                await expect(loginPage.item('errorField')).toBeDisplayed();
+                await expect(loginPage.errorField).toBeDisplayed();
                 // assymetric matcher
-                await expect(loginPage.item('errorField')).toHaveText(expect.stringContaining("Username is required"));
+                await expect(loginPage.errorField).toHaveText(expect.stringContaining("Username is required"));
             });
         });
 
@@ -68,8 +67,8 @@ describe('Login page', () => {
                 await loginPage.setField('username', data.username);
                 await loginPage.setField('password',data.password);
 
-                await expect(loginPage.item('usernameTB')).toHaveValue(data.username);
-                await expect(loginPage.item('passwordTB')).toHaveValue(data.password);
+                await expect(loginPage.usernameTB).toHaveValue(data.username);
+                await expect(loginPage.passwordTB).toHaveValue(data.password);
             });
 
             //clear password field
@@ -77,17 +76,17 @@ describe('Login page', () => {
                 await loginPage.clearField('password');
 
                 //verify the fields are empty
-                await expect(loginPage.item('usernameTB')).not.toHaveValue('');
-                await expect(loginPage.item('passwordTB')).toHaveValue('');
+                await expect(loginPage.usernameTB).not.toHaveValue('');
+                await expect(loginPage.passwordTB).toHaveValue('');
 
             });
 
             //click login button and expect the error
             await allure.step('Check Error message is the one expected', async () => {
                 await loginPage.clickLogin();
-                await expect(loginPage.item('errorField')).toBeDisplayed();
+                await expect(loginPage.errorField).toBeDisplayed();
                 //check the text contained in the field
-                await expect(loginPage.item('errorField')).toHaveText(expect.stringContaining("Password is required"));
+                await expect(loginPage.errorField).toHaveText(expect.stringContaining("Password is required"));
             });
 
         });
@@ -111,8 +110,8 @@ describe('Login page', () => {
                 await loginPage.setField('username', data.username);
                 await loginPage.setField('password',data.password);
 
-                await expect(loginPage.item('usernameTB')).toHaveValue(data.username);
-                await expect(loginPage.item('passwordTB')).toHaveValue(data.password);
+                await expect(loginPage.usernameTB).toHaveValue(data.username);
+                await expect(loginPage.passwordTB).toHaveValue(data.password);
                 
             });
 
