@@ -49,7 +49,7 @@ This project contains automated tests for the SauceDemo website (https://www.sau
    ```
    npm run reinstall
    ```
-8. Allure Commandline is necessary to generate reports from the test results; verify it is installed running
+8. Allure Command Line is necessary to generate reports from the test results; verify it is installed running:
    ```
    npm install -g allure-commandline --save-dev
    ```
