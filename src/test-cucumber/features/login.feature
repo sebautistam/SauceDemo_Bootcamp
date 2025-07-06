@@ -24,7 +24,7 @@ Given I am on the Login page
 When I type username "<username>" and password "<password>" in the "username" and "password" fields
 And I click on the "login" button
 Then I should be redirected to the "Inventory" page
-And The page title should "be equal to" "Swag Labs"
+And The text in the dashboard title should "be equal to" "Swag Labs"
 
 Examples:
     | username      | password      |

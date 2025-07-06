@@ -1,14 +1,13 @@
 import { Given, When } from '@wdio/cucumber-framework';
 import AllureReporter from '@wdio/allure-reporter';
-import LoginPage from '../../pom/pages/login.page';
+import { pages } from '../../pom';
 
-const loginPage = new LoginPage();
 
 //UC1
 
 Given('I am on the Login page', async function() {
     AllureReporter.addStep('Open Login page');
-    return await loginPage.open();
+    return await pages('login').open();
 });
 
 When(
@@ -17,10 +16,10 @@ When(
     {
         AllureReporter.addStep(`Type credentials in ${userfield} and ${passfield}`);
         if(userfield.toLowerCase() === 'username'){
-            await loginPage.setField(userfield, 'test_user');
+            await pages('login').setField(userfield, 'test_user');
         }
         if (passfield.toLowerCase() === 'password'){
-            await loginPage.setField(passfield, 'test_password');
+            await pages('login').setField(passfield, 'test_password');
         }
 });
 
@@ -30,18 +29,18 @@ When(
     {
         AllureReporter.addStep(`Clear ${userfield} and ${passfield} fields`);
         if(userfield.toLowerCase() === 'username'){
-            await loginPage.clearField(userfield);
+            await pages('login').clearField(userfield);
         }
 
         if (passfield.toLowerCase() === 'password'){
-            await loginPage.clearField(passfield);
+            await pages('login').clearField(passfield);
         }
 });
 
 When('I click on the {string} button', async function(button){
     AllureReporter.addStep(`Click ${button} button`);
     if(button.toLowerCase() === 'login') {
-        await loginPage.clickLogin();
+        await pages('login').clickLogin();
     }
 });
 
@@ -51,7 +50,7 @@ When (
     {
         AllureReporter.addStep(`Clear ${passfield} field`);
         if(passfield.toLowerCase() === 'password'){
-            await loginPage.clearField(passfield);
+            await pages('login').clearField(passfield);
         }
 });
 
@@ -61,9 +60,9 @@ When (
     {
         AllureReporter.addStep(`Type ${username} in ${userfield}, and ${password} in ${passfield}`);
         if(userfield.toLowerCase() === 'username'){
-            await loginPage.setField(userfield, username);
+            await pages('login').setField(userfield, username);
         }
         if(passfield.toLowerCase() === 'password'){
-            await loginPage.setField(passfield, password);
+            await pages('login').setField(passfield, password);
         }
 });

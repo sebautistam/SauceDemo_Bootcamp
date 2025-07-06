@@ -1,14 +1,13 @@
 import allure from '@wdio/allure-reporter';
-import LoginPage from '../../pom/pages/login.page';
 import { testData } from './test-data/login.test.data';
+import { pages } from '../../pom';
 
-const loginPage = new LoginPage();
 
 describe('Login page', () => {
 
     // open the website before each test
     beforeEach( async() => {
-        await loginPage.open();
+        await pages('login').open();
     });
 
     //tests that use some or all empty fields (empty username, password)
@@ -25,31 +24,31 @@ describe('Login page', () => {
             // fill in username and password
             await allure.step('Fill in Username and Password fields, check it is correct', async () => {
                 
-                await loginPage.setField('username', data.username);
-                await expect(loginPage.usernameTB).toHaveValue(data.username);
+                await pages('login').setField('username', data.username);
+                await expect(pages('login').usernameTB).toHaveValue(data.username);
                 
-                await loginPage.setField('password',data.password);
-                await expect(loginPage.passwordTB).toHaveValue(data.password);
+                await pages('login').setField('password',data.password);
+                await expect(pages('login').passwordTB).toHaveValue(data.password);
 
             });
 
             //clears fields
             await allure.step('Clear Username and Password fields, check it is empty', async () => {
-                await loginPage.clearField('username');
-                await loginPage.clearField('password');
+                await pages('login').clearField('username');
+                await pages('login').clearField('password');
 
                 //verify the fields are empty
-                await expect(loginPage.usernameTB).toHaveValue('');
-                await expect(loginPage.passwordTB).toHaveValue('');
+                await expect(pages('login').usernameTB).toHaveValue('');
+                await expect(pages('login').passwordTB).toHaveValue('');
             });
 
             //checks correct mesage
             await allure.step('Check Error message is the one expected', async () => {
                 //click login button and expect the error
-                await loginPage.clickLogin();
-                await expect(loginPage.errorField).toBeDisplayed();
+                await pages('login').clickLogin();
+                await expect(pages('login').errorField).toBeDisplayed();
                 // assymetric matcher
-                await expect(loginPage.errorField).toHaveText(expect.stringContaining("Username is required"));
+                await expect(pages('login').errorField).toHaveText(expect.stringContaining("Username is required"));
             });
         });
 
@@ -64,29 +63,29 @@ describe('Login page', () => {
             // fill in username and password
             await allure.step('Fill in Username and Password fields, check it is correct', async () => {
                 
-                await loginPage.setField('username', data.username);
-                await loginPage.setField('password',data.password);
+                await pages('login').setField('username', data.username);
+                await pages('login').setField('password',data.password);
 
-                await expect(loginPage.usernameTB).toHaveValue(data.username);
-                await expect(loginPage.passwordTB).toHaveValue(data.password);
+                await expect(pages('login').usernameTB).toHaveValue(data.username);
+                await expect(pages('login').passwordTB).toHaveValue(data.password);
             });
 
             //clear password field
             await allure.step('Clear Password fields, check it is empty', async () => {
-                await loginPage.clearField('password');
+                await pages('login').clearField('password');
 
                 //verify the fields are empty
-                await expect(loginPage.usernameTB).not.toHaveValue('');
-                await expect(loginPage.passwordTB).toHaveValue('');
+                await expect(pages('login').usernameTB).not.toHaveValue('');
+                await expect(pages('login').passwordTB).toHaveValue('');
 
             });
 
             //click login button and expect the error
             await allure.step('Check Error message is the one expected', async () => {
-                await loginPage.clickLogin();
-                await expect(loginPage.errorField).toBeDisplayed();
+                await pages('login').clickLogin();
+                await expect(pages('login').errorField).toBeDisplayed();
                 //check the text contained in the field
-                await expect(loginPage.errorField).toHaveText(expect.stringContaining("Password is required"));
+                await expect(pages('login').errorField).toHaveText(expect.stringContaining("Password is required"));
             });
 
         });
@@ -107,22 +106,22 @@ describe('Login page', () => {
 
             // fill in username and password
             await allure.step('Fill in Username and Password fields, check it is correct', async () => {
-                await loginPage.setField('username', data.username);
-                await loginPage.setField('password',data.password);
+                await pages('login').setField('username', data.username);
+                await pages('login').setField('password',data.password);
 
-                await expect(loginPage.usernameTB).toHaveValue(data.username);
-                await expect(loginPage.passwordTB).toHaveValue(data.password);
+                await expect(pages('login').usernameTB).toHaveValue(data.username);
+                await expect(pages('login').passwordTB).toHaveValue(data.password);
                 
             });
 
             //click on login button, verify the browser was redirected to correct page
             await allure.step('Check Title and URL are Correct', async () => {
-                await loginPage.clickLogin();
-                //check browser title
-                await expect(browser).toHaveTitle("Swag Labs");
+                await pages('login').clickLogin();
+                
                 //check browser URL
                 await expect(browser).toHaveUrl("https://www.saucedemo.com/inventory.html");
-        
+                //check Page Text in Dashboard
+                await expect(pages('inventory').titleText).toHaveText('Swag Labs');
             });
         });
     });

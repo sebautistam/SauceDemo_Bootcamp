@@ -28,16 +28,6 @@ class LoginPage {
         return await browser.url('/');
     }
 
-    /*item(param) {
-        const selectors = {
-            usernametb: '//*[@placeholder="Username"]',
-            passwordtb: '//*[@placeholder="Password"]',
-            loginbtn: '//*[@id="login-button"]',
-            errorfield: '//*[contains(@class, "error-message-container error")]'
-        }
-        return $(selectors[param.toLowerCase()]);
-    }*/
-
     async setField(selectedField, value) {
         let field;
         switch (selectedField.toLowerCase()) {
