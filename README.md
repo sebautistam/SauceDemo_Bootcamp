@@ -49,6 +49,10 @@ This project contains automated tests for the SauceDemo website (https://www.sau
    ```
    npm run reinstall
    ```
+8. Allure Commandline is necessary to generate reports from the test results; verify it is installed running
+   ```
+   npm install -g allure-commandline --save-dev
+   ```
 
 ### To execute traditional tests (using WebDriverIO with Mocha):
 
@@ -58,7 +62,17 @@ This project contains automated tests for the SauceDemo website (https://www.sau
    ```
     Be aware that running this script will clean up the results of previous runs of the tests from the reporter.
   
-2. To generate the Allure report, run the script:
+2. The previous script will generate the Allure report as a hook after test completion; to open the report run:
+   ```
+   npm run allure-mocha:open
+   ```
+     
+3. To regenerate the Allure report, first run the command to clean the report folder:
+   ```
+   npm run allure-mocha:clean
+   ```
+     
+4. Then, to generate and open the Allure report, run the script:
    ```
    npm run allure-mocha:report
    ```
@@ -71,7 +85,17 @@ This project contains automated tests for the SauceDemo website (https://www.sau
    ```
     Be aware that running this script will clean up the results of previous runs of the tests from the reporter.
   
-2. To generate the Allure report, run the script:
+2. The previous script will generate the Allure report as a hook after test completion; to open the report run:
+   ```
+   npm run allure-cucumber:open
+   ```
+     
+3. To regenerate the Allure report, first run the command to clean the report folder:
+   ```
+   npm run allure-cucumber:clean
+   ```
+     
+4. Then, to generate and open the Allure report, run the script:
    ```
    npm run allure-cucumber:report
    ```
@@ -83,3 +107,11 @@ This project contains automated tests for the SauceDemo website (https://www.sau
    npm run test:all
    ```
     Be aware that running this script will clean up the results of previous runs of the tests from the reporter.
+2. Open the WebDriverIO with Mocha's Allure report by running:
+   ```
+   npm run allure-mocha:open
+   ```
+3. Open the Cucumber's Allure report by running:
+   ```
+   npm run allure-cucumber:open
+   ```

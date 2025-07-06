@@ -1,3 +1,5 @@
+const allure = require('allure-commandline');
+
 const glob = require('glob');
 
 exports.config = {
@@ -262,8 +264,13 @@ exports.config = {
      * @param {number}             result.duration  duration of scenario in milliseconds
      * @param {object}             context          Cucumber World object
      */
-    // afterStep: function (step, scenario, result, context) {
-    // },
+    afterStep: async function (step, scenario, result, context) {
+        if (result.passed === false) {
+            const screenshot = await browser.takeScreenshot();
+            this.attach(screenshot, 'image/png');
+        }
+    },
+
     /**
      *
      * Runs after a Cucumber Scenario.
@@ -319,8 +326,34 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    // onComplete: function(exitCode, config, capabilities, results) {
-    // },
+    onComplete: function() {
+            const reportError = new Error('Could not generate Allure report');
+            const resultsDir = './reports/allure-cucumber/results';
+            const reportDir = './reports/allure-cucumber/report'
+    
+            const generation = allure([
+                'generate', 
+                resultsDir, 
+                '--clean', 
+                '--output', 
+                reportDir
+            ]);
+    
+            return new Promise((resolve, reject) => {
+                const generationTimeout = setTimeout(() => reject(reportError), 10000);
+                generation.on('exit', function (exitCode) {
+                clearTimeout(generationTimeout);
+    
+                if (exitCode !== 0) {
+                    return reject(reportError);
+                }
+    
+                console.log('Open the Web report running:');
+                console.log('npm run allure-cucumber:open');
+                resolve();
+                });
+            });
+        },
     /**
     * Gets executed when a refresh happens.
     * @param {string} oldSessionId session ID of the old session

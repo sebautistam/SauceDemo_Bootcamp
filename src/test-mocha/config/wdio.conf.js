@@ -1,3 +1,5 @@
+const allure = require('allure-commandline');
+
 exports.config = {
     //
     // ====================
@@ -238,6 +240,7 @@ exports.config = {
      * @param {boolean} result.passed    true if test has passed, otherwise false
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
+    
     afterTest: async function(test, context, { error, result, duration, passed, retries }) {
         if (!passed) {
             await browser.takeScreenshot();
@@ -285,8 +288,35 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    // onComplete: function(exitCode, config, capabilities, results) {
-    // },
+
+    onComplete: function() {
+        const reportError = new Error('Could not generate Allure report');
+        const resultsDir = './reports/allure-mocha/results';
+        const reportDir = './reports/allure-mocha/report'
+
+        const generation = allure([
+            'generate', 
+            resultsDir, 
+            '--clean', 
+            '--output', 
+            reportDir
+        ]);
+
+        return new Promise((resolve, reject) => {
+            const generationTimeout = setTimeout(() => reject(reportError), 10000);
+            generation.on('exit', function (exitCode) {
+            clearTimeout(generationTimeout);
+
+            if (exitCode !== 0) {
+                return reject(reportError);
+            }
+
+            console.log('Open the Web report running:');
+            console.log('npm run allure-mocha:open');
+            resolve();
+            });
+        });
+    },
     /**
     * Gets executed when a refresh happens.
     * @param {string} oldSessionId session ID of the old session
