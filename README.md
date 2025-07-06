@@ -62,12 +62,12 @@ This project contains automated tests for the SauceDemo website (https://www.sau
    ```
     Be aware that running this script will clean up the results of previous runs of the tests from the reporter.
   
-2. The previous script will generate the Allure report as a hook after test completion; to open the report run:
+2. The previous script will generate the Allure report as a hook after test completion; to open the report, run:
    ```
    npm run allure-mocha:open
    ```
      
-3. To regenerate the Allure report, first run the command to clean the report folder:
+3. To regenerate the Allure report, first run the script to clean the report folder:
    ```
    npm run allure-mocha:clean
    ```
@@ -85,12 +85,12 @@ This project contains automated tests for the SauceDemo website (https://www.sau
    ```
     Be aware that running this script will clean up the results of previous runs of the tests from the reporter.
   
-2. The previous script will generate the Allure report as a hook after test completion; to open the report run:
+2. The previous script will generate the Allure report as a hook after test completion; to open the report, run:
    ```
    npm run allure-cucumber:open
    ```
      
-3. To regenerate the Allure report, first run the command to clean the report folder:
+3. To regenerate the Allure report, first run the script to clean the report folder:
    ```
    npm run allure-cucumber:clean
    ```
@@ -107,11 +107,11 @@ This project contains automated tests for the SauceDemo website (https://www.sau
    npm run test:all
    ```
     Be aware that running this script will clean up the results of previous runs of the tests from the reporter.
-2. Open the WebDriverIO with Mocha's Allure report by running:
+2. Open the Allure reports by running:
    ```
    npm run allure-mocha:open
    ```
-3. Open the Cucumber's Allure report by running:
+   and
    ```
    npm run allure-cucumber:open
    ```
